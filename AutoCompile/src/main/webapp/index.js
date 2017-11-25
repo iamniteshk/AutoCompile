@@ -11,6 +11,15 @@ window.addEventListener("load", function(){
 
 // Autocomplete for form
 function postajax(event) {
+	
+	var list = document.getElementById('project');
+	if(list.value == ""){
+		document.getElementById('svnPath').value = "";
+		alert("Please select project name first");
+		document.getElementById('project').focus();
+		return false;
+	}
+	
 	console.log("event fired")
     // retireve the input element
     var input = event.target;

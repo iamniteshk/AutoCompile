@@ -52,38 +52,40 @@ input {
 
 	<form method="post" action="UploadServlet"
 		enctype="multipart/form-data" name="form" autocomplete="off">
-<!-- 		onsubmit="return validateForm()"> -->
+		<!-- 		onsubmit="return validateForm()"> -->
 		<table align="center" bgcolor="#2959a0" border="0" width="70%">
 			<tr>
 				<td colspan="2" align="center" style="height: 40px;">Fill all
 					the following fields</td>
 			</tr>
-			
+
 			<tr>
 				<td>Select the FCUBS version:</td>
-				<td><input list="version1" name="version" style="height: 20px;" id="version" onblur="myFunction()" onchange="myFunction()"
-					required> <datalist id="version1">
+				<td><input list="version1" name="version" style="height: 20px;"
+					id="version" onblur="populateProjects()" required> <datalist
+						id="version1">
 					<option value="12.0.1"></option>
 					<option value="12.0.2"></option>
 					<option value="12.0.3"></option>
 					</datalist></td>
 			</tr>
-			
+
 			<tr>
 				<td>Select the Project Name:</td>
-				<td><input list="project1" name="project" style="height: 20px;" id="project"
-					required> <datalist id="project1">
-					</datalist></td>
+				<td><input list="project1" name="project" style="height: 20px;"
+					id="project" onblur="emptyCheck()" required> <datalist
+						id="project1"> </datalist></td>
 			</tr>
-			
+
 			<tr>
 				<td>Enter the file SVN path:</td>
-				<td><input type="text" name="svnPath" id="svnPath" autocomplete="off" 
-					list="huge_list" style="width: 500px; height: 20px;"
+				<td><input type="text" name="svnPath" id="svnPath"
+					autocomplete="off" list="huge_list"
+					style="width: 500px; height: 20px;"
 					placeholder="Example: FacilityKernel.java" required> <datalist
 						id="huge_list"></datalist></td>
 			</tr>
-			
+
 			<tr>
 				<td>Select the jdk version:</td>
 				<td><input list="jdk" name="jdk" style="height: 20px;" required>
@@ -121,40 +123,65 @@ input {
 	<center class="footer">
 		<img alt="logo" src="logo.png" width="100" height="100" border="0">
 	</center>
-	
+
 	<script>
-	function myFunction(){
-		var ver1201 = ['ELCMController','ELCMDao','ELCMDto','ELCMEJB','ELCMEntities','ELCMProcess','ELCMUtility','ELGateway','ELGatewayClient','ELWebServices','FCJBatch','FCJBpel','FCJCoreDAOOracle','FCJGeneralEJB','FCJMBean','FCJNeoWeb','FCJScheduler','FCJSMS','FCJUtility'];
-		var ver1202 = ['ELCMController','ELCMDao','ELCMDto','ELCMEJB','ELCMEntities','ELCMProcess','ELCMUtility','ELGateway','ELGatewayClient','ELWebServices','FCJBatch','FCJBpel','FCJCoreDAOOracle','FCJGeneralEJB','FCJMBean','FCJNeoWeb','FCJScheduler','FCJSMS','FCJUtility'];
-		var ver1203 = ['ELCMCommon','ELCMKernelSQLJ','ELCMKernelJpa','ELCMGateway','ELCMDto','ELCMEJB','ELCMEntities','ELCMKernel','ELCMUtility','ELCMWeb','ELGatewayClient','FCJBatch','FCJBpel','FCJCoreDAOOracle','FCJGeneralEJB','FCJMBean','FCJNeoWeb','FCJScheduler','FCJSMS','FCJUtility','FCJWebTab'];
-		var list = document.getElementById('project1');
-		document.getElementById('project1').innerHTML = "";
-		
-		var version = document.getElementById('version');
-		
-		if(version.value == '12.0.1'){
-			ver1201.forEach(function(item){
-				   var option = document.createElement('option');
-				   option.value = item;
-				   list.appendChild(option);
+		function populateProjects() {
+			var ver1201 = [ 'ELCMController', 'ELCMDao', 'ELCMDto', 'ELCMEJB',
+					'ELCMEntities', 'ELCMProcess', 'ELCMUtility', 'ELGateway',
+					'ELGatewayClient', 'ELWebServices', 'FCJBatch', 'FCJBpel',
+					'FCJCoreDAOOracle', 'FCJGeneralEJB', 'FCJMBean',
+					'FCJNeoWeb', 'FCJScheduler', 'FCJSMS', 'FCJUtility' ];
+			var ver1202 = [ 'ELCMController', 'ELCMDao', 'ELCMDto', 'ELCMEJB',
+					'ELCMEntities', 'ELCMProcess', 'ELCMUtility', 'ELGateway',
+					'ELGatewayClient', 'ELWebServices', 'FCJBatch', 'FCJBpel',
+					'FCJCoreDAOOracle', 'FCJGeneralEJB', 'FCJMBean',
+					'FCJNeoWeb', 'FCJScheduler', 'FCJSMS', 'FCJUtility' ];
+			var ver1203 = [ 'ELCMCommon', 'ELCMKernelSQLJ', 'ELCMKernelJpa',
+					'ELCMGateway', 'ELCMDto', 'ELCMEJB', 'ELCMEntities',
+					'ELCMKernel', 'ELCMUtility', 'ELCMWeb', 'ELGatewayClient',
+					'FCJBatch', 'FCJBpel', 'FCJCoreDAOOracle', 'FCJGeneralEJB',
+					'FCJMBean', 'FCJNeoWeb', 'FCJScheduler', 'FCJSMS',
+					'FCJUtility', 'FCJWebTab' ];
+			var list = document.getElementById('project1');
+			document.getElementById('project1').innerHTML = "";
+
+			var version = document.getElementById('version');
+
+			if (version.value == '12.0.1') {
+				ver1201.forEach(function(item) {
+					var option = document.createElement('option');
+					option.value = item;
+					list.appendChild(option);
 				});
-		} else if(version.value == '12.0.2'){
-			ver1202.forEach(function(item){
-				   var option = document.createElement('option');
-				   option.value = item;
-				   list.appendChild(option);
+			} else if (version.value == '12.0.2') {
+				ver1202.forEach(function(item) {
+					var option = document.createElement('option');
+					option.value = item;
+					list.appendChild(option);
 				});
-		} else if(version.value == '12.0.3'){
-			ver1203.forEach(function(item){
-				   var option = document.createElement('option');
-				   option.value = item;
-				   list.appendChild(option);
+			} else if (version.value == '12.0.3') {
+				ver1203.forEach(function(item) {
+					var option = document.createElement('option');
+					option.value = item;
+					list.appendChild(option);
 				});
+			}
+
 		}
-		
-	}
 	</script>
-	
+
+	<script>
+		function emptyCheck() {
+			var list = document.getElementById('project');
+			if(list.value == ""){
+				alert("Please select project name first");
+				document.getElementById('project').focus();
+				return false;
+			}
+			
+		}
+	</script>
+
 	<script>
 		function validateForm() {
 			var x = document.forms["form"]["svnPath"].value;
