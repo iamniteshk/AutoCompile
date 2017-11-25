@@ -103,7 +103,7 @@ public class MultipleClassProcessor {
 		for (String str : filePathList) {
 			System.out.println("processing file--> " + str);
 			
-			str = ApplicationGlobal.getProps(version).getProperty(str);
+		//	str = ApplicationGlobal.getProps(version).getProperty(str);
 			
 			//str = prop.getProperty(str);
 			

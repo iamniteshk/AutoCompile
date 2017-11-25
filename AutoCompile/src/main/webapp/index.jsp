@@ -1,5 +1,5 @@
-<%@ page language="java" errorPage="error.jsp" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" errorPage="error.jsp"
+	contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -37,7 +37,7 @@ input {
 	width: 100%;
 }
 </style>
-<script src="https://use.fontawesome.com/5098c18a86.js"></script>
+<!-- <script src="https://use.fontawesome.com/5098c18a86.js"></script> -->
 <title>Auto Compilation</title>
 </head>
 <body onload="document.form.reset();">
@@ -51,29 +51,39 @@ input {
 
 
 	<form method="post" action="UploadServlet"
-		enctype="multipart/form-data" name="form"
- 		onsubmit="return validateForm()">
+		enctype="multipart/form-data" name="form" autocomplete="off">
+<!-- 		onsubmit="return validateForm()"> -->
 		<table align="center" bgcolor="#2959a0" border="0" width="70%">
 			<tr>
 				<td colspan="2" align="center" style="height: 40px;">Fill all
 					the following fields</td>
 			</tr>
-			<tr>
-				<td>Enter the file SVN path:</td>
-				<td><input type="text" name="svnPath"
-					style="width: 300px; height: 20px;"
-					placeholder="Example: FacilityKernel.java"
-					required></td>
-			</tr>
+			
 			<tr>
 				<td>Select the FCUBS version:</td>
-				<td><input list="version" name="version" style="height: 20px;"
-					required> <datalist id="version">
+				<td><input list="version1" name="version" style="height: 20px;" id="version" onblur="myFunction()" onchange="myFunction()"
+					required> <datalist id="version1">
 					<option value="12.0.1"></option>
 					<option value="12.0.2"></option>
 					<option value="12.0.3"></option>
 					</datalist></td>
 			</tr>
+			
+			<tr>
+				<td>Select the Project Name:</td>
+				<td><input list="project1" name="project" style="height: 20px;" id="project"
+					required> <datalist id="project1">
+					</datalist></td>
+			</tr>
+			
+			<tr>
+				<td>Enter the file SVN path:</td>
+				<td><input type="text" name="svnPath" id="svnPath" autocomplete="off" 
+					list="huge_list" style="width: 500px; height: 20px;"
+					placeholder="Example: FacilityKernel.java" required> <datalist
+						id="huge_list"></datalist></td>
+			</tr>
+			
 			<tr>
 				<td>Select the jdk version:</td>
 				<td><input list="jdk" name="jdk" style="height: 20px;" required>
@@ -101,6 +111,7 @@ input {
 			</tr>
 		</table>
 	</form>
+	<script src="index.js"></script>
 
 	<p align="center">
 		Note: In case of any issue please write a mail to <a
@@ -110,6 +121,40 @@ input {
 	<center class="footer">
 		<img alt="logo" src="logo.png" width="100" height="100" border="0">
 	</center>
+	
+	<script>
+	function myFunction(){
+		var ver1201 = ['ELCMController','ELCMDao','ELCMDto','ELCMEJB','ELCMEntities','ELCMProcess','ELCMUtility','ELGateway','ELGatewayClient','ELWebServices','FCJBatch','FCJBpel','FCJCoreDAOOracle','FCJGeneralEJB','FCJMBean','FCJNeoWeb','FCJScheduler','FCJSMS','FCJUtility'];
+		var ver1202 = ['ELCMController','ELCMDao','ELCMDto','ELCMEJB','ELCMEntities','ELCMProcess','ELCMUtility','ELGateway','ELGatewayClient','ELWebServices','FCJBatch','FCJBpel','FCJCoreDAOOracle','FCJGeneralEJB','FCJMBean','FCJNeoWeb','FCJScheduler','FCJSMS','FCJUtility'];
+		var ver1203 = ['ELCMCommon','ELCMKernelSQLJ','ELCMKernelJpa','ELCMGateway','ELCMDto','ELCMEJB','ELCMEntities','ELCMKernel','ELCMUtility','ELCMWeb','ELGatewayClient','FCJBatch','FCJBpel','FCJCoreDAOOracle','FCJGeneralEJB','FCJMBean','FCJNeoWeb','FCJScheduler','FCJSMS','FCJUtility','FCJWebTab'];
+		var list = document.getElementById('project1');
+		document.getElementById('project1').innerHTML = "";
+		
+		var version = document.getElementById('version');
+		
+		if(version.value == '12.0.1'){
+			ver1201.forEach(function(item){
+				   var option = document.createElement('option');
+				   option.value = item;
+				   list.appendChild(option);
+				});
+		} else if(version.value == '12.0.2'){
+			ver1202.forEach(function(item){
+				   var option = document.createElement('option');
+				   option.value = item;
+				   list.appendChild(option);
+				});
+		} else if(version.value == '12.0.3'){
+			ver1203.forEach(function(item){
+				   var option = document.createElement('option');
+				   option.value = item;
+				   list.appendChild(option);
+				});
+		}
+		
+	}
+	</script>
+	
 	<script>
 		function validateForm() {
 			var x = document.forms["form"]["svnPath"].value;
@@ -135,14 +180,12 @@ input {
 					|| x.substring(0, x.indexOf("/")) == "FCJScheduler"
 					|| x.substring(0, x.indexOf("/")) == "FCJSMS"
 					|| x.substring(0, x.indexOf("/")) == "FCJUtility"
-					|| x.substring(0, x.indexOf("/")) == "FCJWebTab")
-					 {
+					|| x.substring(0, x.indexOf("/")) == "FCJWebTab") {
 				alert("Only filename with extension is required. No need to provide the path.");
 				document.forms["form"]["svnPath"].value = "";
 				return false;
-					 }
-				else {
-				
+			} else {
+
 				//alert(x.substring(0, x.indexOf("/")));
 				return true;
 			}
