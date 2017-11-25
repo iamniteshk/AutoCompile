@@ -51,11 +51,11 @@ input {
 
 
 	<form method="post" action="UploadServlet"
-		enctype="multipart/form-data" name="form" autocomplete="off">
-		<!-- 		onsubmit="return validateForm()"> -->
+		enctype="multipart/form-data" name="form" autocomplete="off"
+		 		onsubmit="return validateForm()">
 		<table align="center" bgcolor="#2959a0" border="0" width="70%">
 			<tr>
-				<td colspan="2" align="center" style="height: 40px;">Fill all
+				<td colspan="2" align="center" style="height: 20px;">Fill all
 					the following fields</td>
 			</tr>
 
@@ -64,9 +64,9 @@ input {
 				<td><input list="version1" name="version" style="height: 20px;"
 					id="version" onblur="populateProjects()" required> <datalist
 						id="version1">
-					<option value="12.0.1"></option>
-					<option value="12.0.2"></option>
-					<option value="12.0.3"></option>
+					<option value="12.0.1">12.0.1</option>
+					<option value="12.0.2">12.0.2</option>
+					<option value="12.0.3">12.0.3</option>
 					</datalist></td>
 			</tr>
 
@@ -78,11 +78,38 @@ input {
 			</tr>
 
 			<tr>
-				<td>Enter the file SVN path:</td>
+				<td>Enter the file SVN path1:</td>
 				<td><input type="text" name="svnPath" id="svnPath"
 					autocomplete="off" list="huge_list"
 					style="width: 500px; height: 20px;"
 					placeholder="Example: FacilityKernel.java" required> <datalist
+						id="huge_list"></datalist></td>
+			</tr>
+			
+			<tr>
+				<td>Enter the file SVN path2:</td>
+				<td><input type="text" name="svnPath2" id="svnPath2"
+					autocomplete="off" list="huge_list"
+					style="width: 500px; height: 20px;"
+					placeholder="Optional field. Example: FacilityKernel.java"> <datalist
+						id="huge_list"></datalist></td>
+			</tr>
+			
+			<tr>
+				<td>Enter the file SVN path3:</td>
+				<td><input type="text" name="svnPath3" id="svnPath3"
+					autocomplete="off" list="huge_list"
+					style="width: 500px; height: 20px;"
+					placeholder="Optional field. Example: FacilityKernel.java"> <datalist
+						id="huge_list"></datalist></td>
+			</tr>
+			
+			<tr>
+				<td>Enter the file SVN path4:</td>
+				<td><input type="text" name="svnPath4" id="svnPath4"
+					autocomplete="off" list="huge_list"
+					style="width: 500px; height: 20px;"
+					placeholder="Optional field. Example: FacilityKernel.java"> <datalist
 						id="huge_list"></datalist></td>
 			</tr>
 
@@ -103,8 +130,8 @@ input {
 			</tr>
 			<tr>
 				<td>Select file to upload:</td>
-				<td><input type="file" name="dataFile" id="fileChooser"
-					multiple="multiple" required></td>
+				<td><input type="file" name="dataFile" id="fileChooser" 
+					 multiple="multiple"  required></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"
@@ -121,7 +148,7 @@ input {
 			target="_top" style="color: white;">Nitesh.z.kumar@oracle.com</a>
 		with the issue screenshot.
 	<center class="footer">
-		<img alt="logo" src="logo.png" width="100" height="100" border="0">
+		<img alt="logo" src="logo.png" width="100" height="80" border="0">
 	</center>
 
 	<script>
@@ -184,7 +211,7 @@ input {
 
 	<script>
 		function validateForm() {
-			var x = document.forms["form"]["svnPath"].value;
+			/* var x = document.forms["form"]["svnPath"].value;
 			//alert(x.substring(0, x.indexOf("/"));
 			if (x.substring(0, x.indexOf("/")) == "ELCMCommon"
 					|| x.substring(0, x.indexOf("/")) == "ELCMDto"
@@ -215,7 +242,23 @@ input {
 
 				//alert(x.substring(0, x.indexOf("/")));
 				return true;
-			}
+			} */
+			// Get the input element
+		    var input = document.getElementById('svnPath');
+		    // Get the datalist
+		    var huge_list = document.getElementById('huge_list');
+
+
+		    // If we find the input inside our list, we submit the form
+		    for (var element of huge_list.children) {
+		        if(element.value == input.value) {
+		            return true;
+		        }
+		    }
+
+		    // we send an error message
+		    alert("input path is invalid")
+		    return false;
 		}
 	</script>
 </body>

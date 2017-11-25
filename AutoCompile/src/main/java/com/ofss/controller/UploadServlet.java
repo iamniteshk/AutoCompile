@@ -32,8 +32,7 @@ public class UploadServlet extends HttpServlet {
 	private static final int MAX_MEMORY_SIZE = 1024 * 1024 * 2;
 	private static final int MAX_REQUEST_SIZE = 1024 * 1024;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 		response.setContentType("text/html");
 
@@ -43,6 +42,9 @@ public class UploadServlet extends HttpServlet {
 		session.setMaxInactiveInterval(5 * 60);
 
 		String path = "";
+		String path2 = "";
+		String path3 = "";
+		String path4 = "";
 		String version = "";
 		String jdk = "";
 		String email = "";
@@ -70,10 +72,10 @@ public class UploadServlet extends HttpServlet {
 
 		// constructs the folder where uploaded file will be stored
 		String uploadFolder = DATA_DIRECTORY;
-		
-		//create the directory in upload folder
+
+		// create the directory in upload folder
 		File directory = new File(uploadFolder);
-		if(!directory.exists()) {
+		if (!directory.exists()) {
 			directory.mkdir();
 		}
 
@@ -108,6 +110,15 @@ public class UploadServlet extends HttpServlet {
 					case "svnPath":
 						path = item.getString().trim();
 						break;
+					case "svnPath2":
+						path2 = item.getString().trim();
+						break;
+					case "svnPath3":
+						path3 = item.getString().trim();
+						break;
+					case "svnPath4":
+						path4 = item.getString().trim();
+						break;
 					case "version":
 						version = item.getString();
 						break;
@@ -122,6 +133,9 @@ public class UploadServlet extends HttpServlet {
 			}
 
 			System.out.println("path--> " + path);
+			System.out.println("path2--> " + path2);
+			System.out.println("path3--> " + path3);
+			System.out.println("path4--> " + path4);
 			System.out.println("version--> " + version);
 			System.out.println("jdk--> " + jdk);
 			System.out.println("email--> " + email);
@@ -129,20 +143,53 @@ public class UploadServlet extends HttpServlet {
 			session.setAttribute("user_id", email);
 
 			if (path.contains("/")) {
-				finalPath = path.replaceAll("/", "\\\\");
-			} else
-				finalPath = path;
-
-			System.out.println("finalPath--> " + finalPath);
-
-			@SuppressWarnings("resource")
-			Scanner sc = new Scanner(finalPath).useDelimiter(";");
-
-			while (sc.hasNext()) {
-				pathList.add(sc.next());
+				path = path.replaceAll("/", "\\\\");
 			}
 
-			sc.close();
+			if (path2.contains("/")) {
+				path2 = path2.replaceAll("/", "\\\\");
+			}
+
+			if (path3.contains("/")) {
+				path3 = path3.replaceAll("/", "\\\\");
+			}
+
+			if (path4.contains("/")) {
+				path4 = path4.replaceAll("/", "\\\\");
+			}
+
+			System.out.println("path--> " + path);
+			System.out.println("path2--> " + path2);
+			System.out.println("path3--> " + path3);
+			System.out.println("path4--> " + path4);
+			
+			System.out.println("path2--> " + path2== null);
+			System.out.println("path3--> " + path3==null);
+			System.out.println("path4--> " + path4==null);
+			
+			System.out.println("path2--> " + path2.isEmpty());
+			System.out.println("path3--> " + path3.isEmpty());
+			System.out.println("path4--> " + path4.isEmpty());
+
+			/*
+			 * @SuppressWarnings("resource") Scanner sc = new
+			 * Scanner(finalPath).useDelimiter(";");
+			 * 
+			 * while (sc.hasNext()) { pathList.add(sc.next()); }
+			 * 
+			 * sc.close();
+			 */
+
+			pathList.add(path);
+
+			if (path2 != null && !path2.isEmpty())
+				pathList.add(path2);
+
+			if (path3 != null && !path3.isEmpty())
+				pathList.add(path3);
+
+			if (path4 != null && !path4.isEmpty())
+				pathList.add(path4);
 
 			pathList.forEach(pathName -> System.out.println(pathName));
 

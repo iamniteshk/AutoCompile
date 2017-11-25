@@ -3,6 +3,15 @@ window.addEventListener("load", function(){
     // Add a keyup event listener to our input element
     var name_input = document.getElementById('svnPath');
     name_input.addEventListener("keyup", function(event){postajax(event)});
+    
+    var name_input2 = document.getElementById('svnPath2');
+    name_input2.addEventListener("keyup", function(event){postajax(event)});
+    
+    var name_input3 = document.getElementById('svnPath3');
+    name_input3.addEventListener("keyup", function(event){postajax(event)});
+    
+    var name_input4 = document.getElementById('svnPath4');
+    name_input4.addEventListener("keyup", function(event){postajax(event)});
 
     // create one global XHR object 
     // so we can abort old requests when a new one is make

@@ -26,6 +26,9 @@ public class AppCommonServlet extends HttpServlet {
 		String version = req.getParameter("version");
 		String project = req.getParameter("project");
 		String input = req.getParameter("input");
+		if(input.contains(";")){
+			input = input.substring(input.indexOf(";")+1);
+		}
 		System.out.println(version);
 		System.out.println(project);
 		System.out.println(input);
