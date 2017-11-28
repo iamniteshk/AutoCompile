@@ -21,11 +21,11 @@ window.addEventListener("load", function(){
 // Autocomplete for form
 function postajax(event) {
 	
-	var list = document.getElementById('project');
-	if(list.value == ""){
+	var list = document.getElementById('project1');
+	if(list.value === '--Make a choice--'){
 		document.getElementById('svnPath').value = "";
 		alert("Please select project name first");
-		document.getElementById('project').focus();
+		document.getElementById('project1').focus();
 		return false;
 	}
 	
@@ -37,7 +37,7 @@ function postajax(event) {
 	
 	var version = document.getElementById('version');
 	
-	var project = document.getElementById('project');
+	var project = document.getElementById('project1');
 
     // retrieve the datalist element
     var huge_list = document.getElementById('huge_list');

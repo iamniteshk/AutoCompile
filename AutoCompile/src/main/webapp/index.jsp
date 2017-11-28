@@ -61,20 +61,21 @@ input {
 
 			<tr>
 				<td>Select the FCUBS version:</td>
-				<td><input list="version1" name="version" style="height: 20px;"
-					id="version" onblur="populateProjects()" required> <datalist
-						id="version1">
+				<td><select id="version" name="version" style="height: 25px;"
+					id="version" onblur="populateProjects()" required>
+					<option value="">--Make a choice--</option>
 					<option value="12.0.1">12.0.1</option>
 					<option value="12.0.2">12.0.2</option>
 					<option value="12.0.3">12.0.3</option>
-					</datalist></td>
+					</select></td>
 			</tr>
 
 			<tr>
 				<td>Select the Project Name:</td>
-				<td><input list="project1" name="project" style="height: 20px;"
-					id="project" onblur="emptyCheck()" required> <datalist
-						id="project1"> </datalist></td>
+				<td> <select id="project1" name="project" style="height: 25px;"
+					id="project" onblur="emptyCheck()" required>
+					<option value="">--Make a choice--</option>
+					</select></td>
 			</tr>
 
 			<tr>
@@ -115,12 +116,13 @@ input {
 
 			<tr>
 				<td>Select the jdk version:</td>
-				<td><input list="jdk" name="jdk" style="height: 20px;" required>
-					<datalist id="jdk">
-					<option value="1.5"></option>
-					<option value="1.6"></option>
-					<option value="1.7"></option>
-					</datalist></td>
+				<td>
+					<select id="jdk" name="jdk" style="height: 25px;" required>
+					<option value="">--Make a choice--</option>
+					<option value="1.5">1.5</option>
+					<option value="1.6">1.6</option>
+					<option value="1.7">1.7</option>
+					</select></td>
 			</tr>
 			<tr>
 				<td>Enter the requester email id:</td>
@@ -173,22 +175,30 @@ input {
 			document.getElementById('project1').innerHTML = "";
 
 			var version = document.getElementById('version');
+			
+			var option = document.createElement('option');
+			option.innerHTML = '--Make a choice--';
+			option.value = '--Make a choice--';
+			list.appendChild(option);
 
-			if (version.value == '12.0.1') {
+			if (version.value === '12.0.1') {
 				ver1201.forEach(function(item) {
 					var option = document.createElement('option');
+					option.innerHTML = item;
 					option.value = item;
 					list.appendChild(option);
 				});
-			} else if (version.value == '12.0.2') {
+			} else if (version.value === '12.0.2') {
 				ver1202.forEach(function(item) {
 					var option = document.createElement('option');
+					option.innerHTML = item;
 					option.value = item;
 					list.appendChild(option);
 				});
-			} else if (version.value == '12.0.3') {
+			} else if (version.value === '12.0.3') {
 				ver1203.forEach(function(item) {
 					var option = document.createElement('option');
+					option.innerHTML = item;
 					option.value = item;
 					list.appendChild(option);
 				});
@@ -199,10 +209,10 @@ input {
 
 	<script>
 		function emptyCheck() {
-			var list = document.getElementById('project');
-			if(list.value == ""){
+			var list = document.getElementById('project1');
+			if(list.value === '--Make a choice--'){
 				alert("Please select project name first");
-				document.getElementById('project').focus();
+				//document.getElementById('project').focus();
 				return false;
 			}
 			
@@ -251,7 +261,7 @@ input {
 
 		    // If we find the input inside our list, we submit the form
 		    for (var element of huge_list.children) {
-		        if(element.value == input.value) {
+		        if(element.value === input.value) {
 		            return true;
 		        }
 		    }
