@@ -267,7 +267,8 @@ input {
 		    }
 
 		    // we send an error message
-		    alert("input path is invalid")
+		    alert("input SVN path is invalid");
+		    document.getElementById('svnPath').focus();
 		    return false;
 		}
 	</script>

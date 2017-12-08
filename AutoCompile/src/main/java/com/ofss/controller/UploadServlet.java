@@ -205,14 +205,13 @@ public class UploadServlet extends HttpServlet {
 
 			mcp.process(pathList, uploadFolder, version, jdk, email);
 
-			// getServletContext().getRequestDispatcher("/done.jsp").forward(request,
-			// response);
+			 getServletContext().getRequestDispatcher("/done.jsp").forward(request,response);
 
-			out.println("<script type=\"text/javascript\">");
+			/*out.println("<script type=\"text/javascript\">");
 			out.println(
 					"alert('Your file has been uploaded! You will soon recieve an email containing the log file and class files or java files(in case of error) shortly');");
 			out.println("location='index.jsp';");
-			out.println("</script>");
+			out.println("</script>");*/
 
 		} catch (FileUploadException | CompileException ex) {
 			try {
@@ -221,6 +220,9 @@ public class UploadServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}
