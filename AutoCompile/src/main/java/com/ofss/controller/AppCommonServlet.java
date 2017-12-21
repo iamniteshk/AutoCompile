@@ -234,6 +234,7 @@ public class AppCommonServlet extends HttpServlet {
 		}
 		JSONObject obj = new JSONObject(result);
 		resp.setContentType("application/json");
+		resp.setHeader("Access-Control-Allow-Origin","*");
 		PrintWriter out = resp.getWriter();
 		out.print(obj);
 		out.flush();
